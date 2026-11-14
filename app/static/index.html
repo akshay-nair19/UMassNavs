@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#06080f">
   <title>UMass Campus Navigator</title>
   <link rel="stylesheet" href="/app.css">
+  <script src="/effects.js" defer></script>
   <script src="/app.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to main content</a>
-  <header><div class="wrap hero"><div><span class="eyebrow">UMass Amherst / Campus Navigator</span><h1>Make room for the whole trip.</h1><p>Set your starting point, add stops, and bring in your classes. Your itinerary stays local while verified routes are being built.</p></div><span class="hero-badge">Local preview<br><strong>Routes pending review</strong></span></div></header>
+  <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
+  <header class="site-header"><div class="wrap"><div class="topbar"><span class="brand"><span class="brand-mark" aria-hidden="true"></span> UMass <strong>Navigator</strong></span><span class="live-status"><span class="status-dot" aria-hidden="true"></span> Local preview <span class="status-divider" aria-hidden="true">/</span> Routes in review</span></div><div class="hero"><div><span class="eyebrow">Campus / In sequence</span><h1>Make room for<br>the whole trip.</h1><p>Start anywhere, add the stops that matter, and bring in your classes. Build an itinerary while verified paths are being reviewed.</p></div><div class="hero-visual" aria-hidden="true"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="orbit-core"></span><span class="orbit-point point-a"></span><span class="orbit-point point-b"></span><span class="orbit-point point-c"></span></div></div></div></header>
   <main id="main" class="wrap">
-    <section class="panel" aria-labelledby="trip-heading">
+    <section class="panel glass-card" aria-labelledby="trip-heading">
       <div class="section-head"><span class="number">01</span><div><h2 id="trip-heading">Your itinerary</h2><p>Choose a starting point, optional stops, and a final destination.</p></div></div>
       <div class="grid">
-        <div class="field"><label for="origin">Current location</label><input id="origin" list="place-list" autocomplete="off" placeholder="Search a campus place or type a location"><small id="place-count">Loading campus place suggestions…</small><small>Manual locations are allowed; they are not yet verified.</small></div>
+        <div class="field"><label for="origin">Current location</label><input id="origin" list="place-list" autocomplete="off" placeholder="Search a campus place or type a location"><small id="place-count" aria-busy="true">Loading campus place suggestions…</small><small>Manual locations are allowed; they are not yet verified.</small></div>
         <div class="field"><label for="destination">Destination</label><input id="destination" list="place-list" autocomplete="off" placeholder="Search a building or type a destination"><small>You can correct an imported class location here.</small></div>
       </div>
       <datalist id="place-list"></datalist>
@@ -30,7 +33,7 @@
       <div id="trip-result" class="notice" role="status" aria-live="polite">Enter a starting point and destination, then review your itinerary. Verified routes are still being built.</div>
     </section>
 
-    <section class="panel" aria-labelledby="calendar-heading">
+    <section class="panel glass-card" aria-labelledby="calendar-heading">
       <div class="section-head"><span class="number">02</span><div><h2 id="calendar-heading">Class destinations</h2><p>Recurring meetings at the same destination appear once, with the next meeting shown.</p></div></div>
       <div class="upload-row"><div class="field"><label for="calendar-file">Calendar file (.ics)</label><input id="calendar-file" type="file" accept=".ics,text/calendar"><small>Processed in memory on this computer. Nothing is saved by the app.</small></div><button id="import-calendar" type="button">Import schedule</button></div>
       <div id="calendar-status" class="hint" role="status" aria-live="polite">No calendar imported.</div>

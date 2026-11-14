@@ -33,6 +33,7 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Use `Ctrl+C` to stop it. Ru
 - The official map is a broad index, not a live inventory or routable map. It includes areas, landmarks, and entries marked under construction or renovation. A place in the picker does not imply it is open, reachable, or accessible. Calendar aliases may still misidentify abbreviated rooms; correct them in the UI. The supplied `Arnold Room 140` now matches the indexed place **Arnold**, but the room itself remains unverified. The original personal calendar is intentionally excluded from the repository; synthetic fixtures cover its relevant shape.
 - The text request parser only recognizes known names in a basic `from … to …` pattern and the phrase “my next class.” It does not call an AI model.
 - Preferences are recorded in the interface only. No route, distance, travel time, accessibility status, or geographic map is shown because the required evidence-backed graph does not exist yet. Opening the external transit links leaves the local app and may share information you enter on those services.
+- The dark glass interface uses a local-only visual effects script. Its pointer cursor and card spotlight are disabled for coarse pointers or reduced-motion settings; the native cursor and all form controls remain available.
 
 ## Next step: evidence-backed campus data
 

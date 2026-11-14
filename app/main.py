@@ -25,6 +25,11 @@ def js():
     return FileResponse(STATIC / "app.js", media_type="text/javascript")
 
 
+@app.get("/effects.js")
+def effects():
+    return FileResponse(STATIC / "effects.js", media_type="text/javascript")
+
+
 @app.get("/api/places")
 def places():
     return [{"id": p.id, "name": p.name, "aliases": p.aliases,

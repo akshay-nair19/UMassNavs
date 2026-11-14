@@ -13,7 +13,8 @@ fetch('/api/places').then(response => response.json()).then(data => {
     $('place-list').append(option);
   }
   $('place-count').textContent = `${places.length} searchable locations from the UMass January 2026 map index and calendar aliases.`;
-}).catch(() => { $('place-count').textContent = 'Could not load campus place suggestions. You can still type a location.'; });
+  $('place-count').removeAttribute('aria-busy');
+}).catch(() => { $('place-count').textContent = 'Could not load campus place suggestions. You can still type a location.'; $('place-count').removeAttribute('aria-busy'); });
 
 const formatTime = iso => new Intl.DateTimeFormat('en-US', {
   timeZone: 'America/New_York', weekday: 'short', month: 'short', day: 'numeric',
@@ -30,7 +31,7 @@ function renderStops() {
     return;
   }
   stops.forEach((name, index) => {
-    const row = document.createElement('li'); row.className = 'stop-row';
+    const row = document.createElement('li'); row.className = 'stop-row glass-card';
     const label = document.createElement('span'); label.textContent = `${index + 1}. ${name}`;
     const actions = document.createElement('span'); actions.className = 'stop-actions';
     for (const [word, offset] of [['Up', -1], ['Down', 1]]) {
@@ -51,6 +52,7 @@ function renderStops() {
     });
     actions.append(remove); row.append(label, actions); list.append(row);
   });
+  window.CampusEffects?.initGlassCards();
 }
 
 function addStop() {
@@ -118,7 +120,7 @@ function renderEvents() {
     container.append(empty); return;
   }
   for (const group of destinations) {
-    const article = document.createElement('article'); article.className = 'event';
+    const article = document.createElement('article'); article.className = 'event glass-card';
     const head = document.createElement('div'); head.className = 'event-head';
     const content = document.createElement('div');
     const title = document.createElement('h3');
@@ -139,6 +141,7 @@ function renderEvents() {
     button.addEventListener('click', () => selectEvent(group));
     head.append(content, button); article.append(head); container.append(article);
   }
+  window.CampusEffects?.initGlassCards();
 }
 
 $('import-calendar').addEventListener('click', async () => {
@@ -146,6 +149,7 @@ $('import-calendar').addEventListener('click', async () => {
   if (!file) { $('calendar-status').textContent = 'Choose an .ics file first.'; return; }
   if (!file.name.toLowerCase().endsWith('.ics')) { $('calendar-status').textContent = 'Choose a file ending in .ics.'; return; }
   $('calendar-status').textContent = 'Reading calendar…';
+  $('calendar-status').setAttribute('aria-busy', 'true');
   $('import-calendar').disabled = true;
   try {
     const response = await fetch('/api/calendar/import', { method: 'POST', headers: {'Content-Type': 'text/calendar'}, body: file });
@@ -161,7 +165,7 @@ $('import-calendar').addEventListener('click', async () => {
       renderEvents();
     }
   } catch (error) { $('calendar-status').textContent = error.message; }
-  finally { $('import-calendar').disabled = false; }
+  finally { $('import-calendar').disabled = false; $('calendar-status').removeAttribute('aria-busy'); }
 });
 
 $('travel-mode').addEventListener('change', () => {
