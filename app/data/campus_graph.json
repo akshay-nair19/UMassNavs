@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "evidence": [
+    {
+      "id": "campus-map-2026",
+      "kind": "official_general_map",
+      "source_title": "UMass Amherst General Location Campus Map, January 2026",
+      "source_url": "https://www.umass.edu/sites/default/files/2026-03/FY26_Campus_Map_Update_with_INDEX-FINAL-EDITORIAL_FINAL.pdf",
+      "source_date": "2026-01",
+      "review_date": "2026-11-14",
+      "review_method": "desk_visual",
+      "observation": "The building index places Student Union and Integrative Learning Center in map grid C3. This map does not identify a connected pedestrian graph or step-free path."
+    },
+    {
+      "id": "accessibility-map-2024",
+      "kind": "official_accessibility_map",
+      "source_title": "UMass Amherst 2024 Campus Accessibility Map",
+      "source_url": "https://www.umass.edu/planning-design-construction/sites/default/files/2024-11/CampusMap-Accessbility-Large-2024.pdf",
+      "source_date": "2022-08",
+      "review_date": "2026-11-14",
+      "review_method": "desk_visual",
+      "observation": "The official maps page dates the accessibility data to August 2022 and disclaims completeness. The PDF colors Student Union and Integrative Learning Center as fully accessible and marks auto-door/key-card entrances on their edges. It does not establish outdoor step-free connectivity, grades, or present-day door status."
+    }
+  ],
+  "places": [
+    {
+      "id": "student-union",
+      "name": "Student Union",
+      "reported_building_access": "fully_accessible",
+      "evidence_ids": ["campus-map-2026", "accessibility-map-2024"]
+    },
+    {
+      "id": "ilc",
+      "name": "Integrative Learning Center",
+      "reported_building_access": "fully_accessible",
+      "evidence_ids": ["campus-map-2026", "accessibility-map-2024"]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "student-union-northwest-map-marker",
+      "kind": "entrance",
+      "place_id": "student-union",
+      "relative_location": "Northwest edge entrance symbol on the 2024 accessibility map; exact doorway requires field review",
+      "latitude": null,
+      "longitude": null
+    },
+    {
+      "id": "student-union-south-map-marker",
+      "kind": "entrance",
+      "place_id": "student-union",
+      "relative_location": "South edge entrance symbol on the 2024 accessibility map; exact doorway requires field review",
+      "latitude": null,
+      "longitude": null
+    },
+    {
+      "id": "ilc-southwest-map-marker",
+      "kind": "entrance",
+      "place_id": "ilc",
+      "relative_location": "Southwest edge entrance symbol on the 2024 accessibility map; exact doorway requires field review",
+      "latitude": null,
+      "longitude": null
+    }
+  ],
+  "entrances": [
+    {
+      "id": "student-union-northwest-entrance",
+      "place_id": "student-union",
+      "node_id": "student-union-northwest-map-marker",
+      "reported_door_symbol": "auto_door_keycard_accessible_all_floors",
+      "current_step_free_status": "unknown",
+      "evidence_ids": ["accessibility-map-2024"]
+    },
+    {
+      "id": "student-union-south-entrance",
+      "place_id": "student-union",
+      "node_id": "student-union-south-map-marker",
+      "reported_door_symbol": "auto_door_keycard_accessible_all_floors",
+      "current_step_free_status": "unknown",
+      "evidence_ids": ["accessibility-map-2024"]
+    },
+    {
+      "id": "ilc-southwest-entrance",
+      "place_id": "ilc",
+      "node_id": "ilc-southwest-map-marker",
+      "reported_door_symbol": "auto_door_keycard_accessible_all_floors",
+      "current_step_free_status": "unknown",
+      "evidence_ids": ["accessibility-map-2024"]
+    }
+  ],
+  "edges": [
+    {
+      "id": "candidate-student-union-south-to-ilc-southwest",
+      "from_node": "student-union-south-map-marker",
+      "to_node": "ilc-southwest-map-marker",
+      "mode": "pedestrian",
+      "status": "candidate",
+      "step_free_status": "unknown",
+      "grade_status": "unknown",
+      "grade_percent": null,
+      "distance_m": null,
+      "geometry": null,
+      "source_url": "https://www.umass.edu/planning-design-construction/sites/default/files/2024-11/CampusMap-Accessbility-Large-2024.pdf",
+      "source_date": "2022-08",
+      "review_date": "2026-11-14",
+      "review_method": "desk_visual",
+      "evidence_ids": ["accessibility-map-2024", "campus-map-2026"],
+      "note": "Research target only. The maps show the two buildings and entrance symbols but do not verify a direct connected path, steps, grade, surface, distance, or current closure status."
+    }
+  ]
+}
