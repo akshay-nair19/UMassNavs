@@ -1,0 +1,4 @@
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
+icalendar>=6,<8
+recurring-ical-events>=3,<4

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UMass Campus Navigator</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+  <header><div class="wrap"><span class="eyebrow">Local campus tool · First build</span><h1>Find your next campus destination</h1><p>Bring in a class schedule or enter a place yourself. Routes will appear after campus paths are reviewed.</p></div></header>
+  <main id="main" class="wrap">
+    <section class="panel" aria-labelledby="trip-heading">
+      <div class="section-head"><span class="number">01</span><div><h2 id="trip-heading">Your trip</h2><p>Choose a starting point and destination.</p></div></div>
+      <div class="grid">
+        <div class="field"><label for="origin">Current location</label><input id="origin" list="place-list" autocomplete="off" placeholder="Search a campus place or type a location"><small>Manual locations are allowed; they are not yet verified.</small></div>
+        <div class="field"><label for="destination">Destination</label><input id="destination" list="place-list" autocomplete="off" placeholder="Search a building or type a destination"><small>You can correct an imported class location here.</small></div>
+      </div>
+      <datalist id="place-list"></datalist>
+      <div class="field"><label for="request">Describe your trip (optional)</label><input id="request" type="text" placeholder="From the library to my next class without stairs"><small>Text can suggest a destination. Confirm it in the field above.</small></div>
+      <div id="request-conflict" class="notice" hidden><p id="conflict-message"></p><button id="use-text" type="button">Use text destination</button> <button id="use-class" type="button">Use selected class</button></div>
+      <fieldset><legend>Preferences</legend><label class="check"><input id="step-free" type="checkbox" checked> Step-free route required</label><label class="check"><input id="grades" type="checkbox"> Avoid steep grades</label><p class="hint">Path and grade evidence have not been reviewed yet, so neither preference can be verified.</p></fieldset>
+      <button id="review-trip" class="primary" type="button">Review trip</button>
+      <div id="trip-result" class="notice" role="status" aria-live="polite">Choose a destination to begin. No verified route data is installed.</div>
+    </section>
+
+    <section class="panel" aria-labelledby="calendar-heading">
+      <div class="section-head"><span class="number">02</span><div><h2 id="calendar-heading">Class schedule</h2><p>Import an iCalendar file to choose an upcoming class.</p></div></div>
+      <div class="upload-row"><div class="field"><label for="calendar-file">Calendar file (.ics)</label><input id="calendar-file" type="file" accept=".ics,text/calendar"><small>Processed in memory on this computer. Nothing is saved by the app.</small></div><button id="import-calendar" type="button">Import schedule</button></div>
+      <div id="calendar-status" class="hint" role="status" aria-live="polite">No calendar imported.</div>
+      <div id="events" class="events" aria-label="Upcoming events"></div>
+    </section>
+    <p class="footer-note">Campus Navigator · Calendar and destination preview. No accessibility or navigation claims yet.</p>
+  </main>
+</body>
+</html>
