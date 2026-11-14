@@ -1,0 +1,807 @@
+{
+  "source_title": "UMass Amherst General Location Campus Map, building index",
+  "source_url": "https://www.umass.edu/sites/default/files/2026-03/FY26_Campus_Map_Update_with_INDEX-FINAL-EDITORIAL_FINAL.pdf",
+  "source_date": "2026-01",
+  "locations": [
+    {
+      "name": "Agricultural Engineering Building",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Agricultural Learning Center",
+      "map_grid": "C1"
+    },
+    {
+      "name": "Alfond",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Apiary Building",
+      "map_grid": "D4"
+    },
+    {
+      "name": "Army ROTC Building",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Arnold",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Art Barn",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Artisan",
+      "map_grid": "C5"
+    },
+    {
+      "name": "Astronomy Building",
+      "map_grid": "B2"
+    },
+    {
+      "name": "Auxiliary Services Warehouse",
+      "map_grid": "A2"
+    },
+    {
+      "name": "Baker",
+      "map_grid": "D3-4"
+    },
+    {
+      "name": "Bartlett",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Berkshire",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Berkshire Dining Commons",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Birch",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Blaisdell House",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Bowditch Hall",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Bowditch Lodge",
+      "map_grid": "A6"
+    },
+    {
+      "name": "Bowditch Research Greenhouses",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Bowker Auditorium (Stockbridge)",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Boyden Gym",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Brett",
+      "map_grid": "D3-4"
+    },
+    {
+      "name": "Brooks",
+      "map_grid": "D3"
+    },
+    {
+      "name": "Brown",
+      "map_grid": "D2"
+    },
+    {
+      "name": "Business Innovation Hub",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Butterfield",
+      "map_grid": "E4"
+    },
+    {
+      "name": "Campus Center (hotel), Lincoln",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Campus Center Parking Garage",
+      "map_grid": "B-C3"
+    },
+    {
+      "name": "Campus Pond",
+      "map_grid": "C3-4"
+    },
+    {
+      "name": "Cance",
+      "map_grid": "B6"
+    },
+    {
+      "name": "Cashin",
+      "map_grid": "D2"
+    },
+    {
+      "name": "Central Heating Plant",
+      "map_grid": "A3"
+    },
+    {
+      "name": "Central Residential Area",
+      "map_grid": "D3-4"
+    },
+    {
+      "name": "Chadbourne",
+      "map_grid": "D-E4"
+    },
+    {
+      "name": "Chenoweth",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Clark",
+      "map_grid": "D4"
+    },
+    {
+      "name": "Cold Storage Building",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Commonwealth Honors College Residential Community",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Communication Disorders",
+      "map_grid": "D5"
+    },
+    {
+      "name": "Computer Science Building",
+      "map_grid": "B2"
+    },
+    {
+      "name": "Computer Science Laboratories",
+      "map_grid": "B2"
+    },
+    {
+      "name": "Conte Polymer Research Center",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Coolidge",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Crabtree",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Crampton",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Crotty Hall",
+      "map_grid": "D5"
+    },
+    {
+      "name": "Curry Hicks Cage",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Curry Hicks Physical Education",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Development and Alumni Affairs",
+      "map_grid": "B6"
+    },
+    {
+      "name": "Dickinson Hall",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Dickinson House",
+      "map_grid": "D3"
+    },
+    {
+      "name": "Draper",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Duda",
+      "map_grid": "B2"
+    },
+    {
+      "name": "Durfee Conservatory",
+      "map_grid": "D3"
+    },
+    {
+      "name": "Dwight",
+      "map_grid": "C2"
+    },
+    {
+      "name": "East Experiment Station",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Elm",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Emerson",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Engineering Laboratory",
+      "map_grid": "B2"
+    },
+    {
+      "name": "Engineering Laboratory II",
+      "map_grid": "B2"
+    },
+    {
+      "name": "Farley Lodge",
+      "map_grid": "A6"
+    },
+    {
+      "name": "Fernald",
+      "map_grid": "D4"
+    },
+    {
+      "name": "Field",
+      "map_grid": "E3"
+    },
+    {
+      "name": "Flint Laboratory (under renovation)",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Forest & Parks Buildings",
+      "map_grid": "A3"
+    },
+    {
+      "name": "Franklin Dining Commons",
+      "map_grid": "D4"
+    },
+    {
+      "name": "French",
+      "map_grid": "D3"
+    },
+    {
+      "name": "Furcolo",
+      "map_grid": "C1"
+    },
+    {
+      "name": "Garber Field",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Gladchuck Sports Complex",
+      "map_grid": "A6"
+    },
+    {
+      "name": "Goessmann",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Goodell",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Gordon",
+      "map_grid": "D5"
+    },
+    {
+      "name": "Gorman",
+      "map_grid": "D4"
+    },
+    {
+      "name": "Grayson",
+      "map_grid": "E3"
+    },
+    {
+      "name": "Greenough",
+      "map_grid": "D3"
+    },
+    {
+      "name": "Grinnell Arena",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Gunness Engineering",
+      "map_grid": "B2"
+    },
+    {
+      "name": "Hadley Equestrian Farm",
+      "map_grid": "A5"
+    },
+    {
+      "name": "Haigis Mall",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Hamlin",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Hampden Dining Commons",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Hampshire",
+      "map_grid": "C5"
+    },
+    {
+      "name": "Hampshire Dining Commons",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Hasbrouck",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Hatch",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Herter",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Hillel House",
+      "map_grid": "D5"
+    },
+    {
+      "name": "Hillside",
+      "map_grid": "D3"
+    },
+    {
+      "name": "Holdsworth",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Holocaust Center",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Horse Barn",
+      "map_grid": "C1"
+    },
+    {
+      "name": "Integrated Sciences Building",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Integrative Learning Center",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Intermediate Processing Facility (IPF)",
+      "map_grid": "E1"
+    },
+    {
+      "name": "International Programs",
+      "map_grid": "D4"
+    },
+    {
+      "name": "Isenberg School of Management",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Jacobson Football Performance Center",
+      "map_grid": "A6"
+    },
+    {
+      "name": "James",
+      "map_grid": "B5"
+    },
+    {
+      "name": "John Adams",
+      "map_grid": "B5"
+    },
+    {
+      "name": "John Q. Adams",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Johnson",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Kennedy",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Kennedy Champions Center",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Kinney Renaissance Center",
+      "map_grid": "E1"
+    },
+    {
+      "name": "Knowles",
+      "map_grid": "B-C3"
+    },
+    {
+      "name": "Knowlton",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Leach",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Lederle Graduate Research Center",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Lewis",
+      "map_grid": "D2"
+    },
+    {
+      "name": "LGRC Tower",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Library, W. E. B. Du Bois",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Life Science Laboratories",
+      "map_grid": "D3"
+    },
+    {
+      "name": "Linden",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Lorden Field (baseball)",
+      "map_grid": "A3"
+    },
+    {
+      "name": "Lyon",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Machmer",
+      "map_grid": "B-C3"
+    },
+    {
+      "name": "MacKimmie",
+      "map_grid": "B-C5"
+    },
+    {
+      "name": "Mahar Auditorium",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Maple",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Marcus",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Marston",
+      "map_grid": "B2"
+    },
+    {
+      "name": "Mather",
+      "map_grid": "E2"
+    },
+    {
+      "name": "McGuirk Alumni Stadium",
+      "map_grid": "A6"
+    },
+    {
+      "name": "McNamara",
+      "map_grid": "D1"
+    },
+    {
+      "name": "Melville",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Memorial Hall",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Middlesex",
+      "map_grid": "C4-5"
+    },
+    {
+      "name": "Montague House",
+      "map_grid": "C1"
+    },
+    {
+      "name": "Moore",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Morrill Science Center Buildings",
+      "map_grid": "C3-4"
+    },
+    {
+      "name": "Mullins Center",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Mullins Practice Rink",
+      "map_grid": "A-B3"
+    },
+    {
+      "name": "Munson",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Nelson Houses",
+      "map_grid": "E2"
+    },
+    {
+      "name": "New Africa House",
+      "map_grid": "D4"
+    },
+    {
+      "name": "Newman Center",
+      "map_grid": "D4"
+    },
+    {
+      "name": "North Residential Area",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Northeast Residential Area",
+      "map_grid": "C-D2"
+    },
+    {
+      "name": "Oak",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Observatory",
+      "map_grid": "D2"
+    },
+    {
+      "name": "Old Chapel",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Olver Design Building",
+      "map_grid": "D4"
+    },
+    {
+      "name": "Orchard Hill Residential Area",
+      "map_grid": "D-E3"
+    },
+    {
+      "name": "Paige",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Parks Marching Band Building",
+      "map_grid": "B3-4"
+    },
+    {
+      "name": "Patterson",
+      "map_grid": "C6"
+    },
+    {
+      "name": "Photo Laboratory",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Physical Plant",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Physical Sciences Building",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Pierpont",
+      "map_grid": "B6"
+    },
+    {
+      "name": "Prince",
+      "map_grid": "B5"
+    },
+    {
+      "name": "PVTA Bus Garage",
+      "map_grid": "B2"
+    },
+    {
+      "name": "Randolph W. Bromery Center for the Arts",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Recreation Center",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Recreation Turf Fields",
+      "map_grid": "A4"
+    },
+    {
+      "name": "Residence Hall Security (Dickinson)",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Rudd Field (soccer)",
+      "map_grid": "A5"
+    },
+    {
+      "name": "Shade Tree Laboratory",
+      "map_grid": "D4"
+    },
+    {
+      "name": "Skinner",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Slate",
+      "map_grid": "C5"
+    },
+    {
+      "name": "Sortino Softball Complex",
+      "map_grid": "A5"
+    },
+    {
+      "name": "South College",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Southwest Residential Area",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Stockbridge School of Agriculture",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Student Union",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Studio Arts Building",
+      "map_grid": "D4"
+    },
+    {
+      "name": "Sustainable Engineering Laboratories (SEL) (under construction)",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Sycamore",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Sylvan Residential Area",
+      "map_grid": "D1-2"
+    },
+    {
+      "name": "Telecommunications Office",
+      "map_grid": "A5"
+    },
+    {
+      "name": "Tennis Courts",
+      "map_grid": "A4"
+    },
+    {
+      "name": "Thatcher",
+      "map_grid": "D2"
+    },
+    {
+      "name": "Thompson",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Thoreau",
+      "map_grid": "B5"
+    },
+    {
+      "name": "Tillson Farm",
+      "map_grid": "E1"
+    },
+    {
+      "name": "Tillson House",
+      "map_grid": "E1"
+    },
+    {
+      "name": "Tobin",
+      "map_grid": "B4"
+    },
+    {
+      "name": "Toddler House",
+      "map_grid": "A6"
+    },
+    {
+      "name": "Totman",
+      "map_grid": "C2"
+    },
+    {
+      "name": "Track & Field",
+      "map_grid": "A5"
+    },
+    {
+      "name": "Transit Facility",
+      "map_grid": "B3"
+    },
+    {
+      "name": "UMass Outreach & Extension",
+      "map_grid": "B6"
+    },
+    {
+      "name": "UMass Police Station",
+      "map_grid": "E1"
+    },
+    {
+      "name": "University Club",
+      "map_grid": "D3"
+    },
+    {
+      "name": "University Extension",
+      "map_grid": "B6"
+    },
+    {
+      "name": "University Health Services",
+      "map_grid": "D3"
+    },
+    {
+      "name": "University Press (East Experiment Station)",
+      "map_grid": "C3"
+    },
+    {
+      "name": "University Without Walls (UWW)",
+      "map_grid": "B3"
+    },
+    {
+      "name": "Van Meter",
+      "map_grid": "E3-4"
+    },
+    {
+      "name": "Washington",
+      "map_grid": "B6"
+    },
+    {
+      "name": "Waste Water Treatment",
+      "map_grid": "A4"
+    },
+    {
+      "name": "Webster",
+      "map_grid": "D3"
+    },
+    {
+      "name": "West Experiment Station",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Wheeler",
+      "map_grid": "D4"
+    },
+    {
+      "name": "Whitmore Administration Building",
+      "map_grid": "C4"
+    },
+    {
+      "name": "Wilder",
+      "map_grid": "D3"
+    },
+    {
+      "name": "William Smith Clark Memorial",
+      "map_grid": "E4"
+    },
+    {
+      "name": "Worcester Dining Commons",
+      "map_grid": "C3"
+    },
+    {
+      "name": "Wysocki House",
+      "map_grid": "C1"
+    }
+  ]
+}

@@ -27,7 +27,8 @@ def js():
 
 @app.get("/api/places")
 def places():
-    return [{"id": p.id, "name": p.name, "aliases": p.aliases} for p in PLACES]
+    return [{"id": p.id, "name": p.name, "aliases": p.aliases,
+             "map_grid": p.map_grid} for p in PLACES]
 
 
 @app.post("/api/calendar/import")
