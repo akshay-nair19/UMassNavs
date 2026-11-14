@@ -28,9 +28,10 @@
       <div id="request-conflict" class="notice" hidden><p id="conflict-message"></p><button id="use-text" type="button">Use text destination</button> <button id="use-class" type="button">Use selected class</button></div>
       <div class="field"><label for="travel-mode">Travel mode</label><select id="travel-mode"><option value="walk">Walking</option><option value="bus">Public bus</option><option value="mixed">Walking and public bus</option></select><small>Selecting bus shows official transit planning resources for your itinerary.</small></div>
       <div id="transit-guidance" class="transit-guidance" hidden><strong>Check transit before each leg.</strong> UMass Transit lists campus shuttle routes 34 and 35, current schedules, and bus tracking. <a href="https://www.umass.edu/transportation/transit/pvta-routes-and-schedules" target="_blank" rel="noopener noreferrer">UMass routes and schedules</a> · <a href="https://www.pvta.com/" target="_blank" rel="noopener noreferrer">PVTA trip planner</a>. External sites may have different privacy practices.</div>
-      <fieldset><legend>Preferences</legend><label class="check"><input id="step-free" type="checkbox" checked> Step-free route required</label><label class="check"><input id="grades" type="checkbox"> Avoid steep grades</label><p class="hint">Path and grade evidence have not been reviewed yet, so neither preference can be verified.</p></fieldset>
+      <fieldset><legend>Preferences</legend><label class="check"><input id="step-free" type="checkbox" checked> Step-free route required</label><label class="check"><input id="grades" type="checkbox"> Avoid grades over 5%</label><p class="hint">Only field-reviewed segments can appear in a route. The current campus graph has no verified connected path.</p></fieldset>
       <button id="review-trip" class="primary" type="button">Review itinerary</button>
       <div id="trip-result" class="notice" role="status" aria-live="polite">Enter a starting point and destination, then review your itinerary. Verified routes are still being built.</div>
+      <div id="route-details" class="route-details" aria-label="Route details" hidden></div>
       <div id="transit-legs" class="transit-legs" hidden></div>
     </section>
 

@@ -15,7 +15,7 @@ def test_candidate_cannot_be_promoted_without_field_evidence():
     graph = load_graph()
     promoted = replace(graph, edges=(replace(graph.edges[0], status="production", step_free_status="verified"),))
     errors = validate_graph(promoted)
-    assert any("field-verified" in error for error in errors)
+    assert any("field-reviewed" in error for error in errors)
     assert any("unverified entrance" in error for error in errors)
     with pytest.raises(ValueError, match="Invalid campus graph"):
         strict_step_free_edges(promoted)

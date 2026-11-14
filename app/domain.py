@@ -82,6 +82,7 @@ class Event:
 class Route:
     start_place_id: str
     end_place_id: str
+    node_ids: tuple[str, ...]
     edge_ids: tuple[str, ...]
     evidence_ids: tuple[str, ...]
     status: Literal["verified", "unavailable"]

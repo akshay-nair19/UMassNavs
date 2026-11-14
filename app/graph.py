@@ -1,4 +1,4 @@
-"""Load and validate reviewed campus graph data without constructing routes."""
+"""Load and validate reviewed campus graph data."""
 
 from dataclasses import dataclass
 from datetime import date
@@ -141,12 +141,12 @@ def validate_graph(graph: CampusGraph) -> list[str]:
         if not any(evidence.get(ref) and evidence[ref].source_url == item.source_url for ref in item.evidence_ids):
             errors.append(f"Edge {item.id} source URL must match cited evidence")
         if item.status == "production" and (
-            item.step_free_status != "verified" or item.grade_status != "verified"
+            item.step_free_status == "unknown" or item.grade_status != "verified"
             or item.distance_m is None or item.geometry is None
             or item.review_method != "field"
             or not any(evidence.get(ref) and evidence[ref].review_method == "field" for ref in item.evidence_ids)
         ):
-            errors.append(f"Edge {item.id} cannot be production without field-verified access, grade, distance, and geometry")
+            errors.append(f"Edge {item.id} cannot be production without field-reviewed access, grade, distance, and geometry")
         if item.status == "production" and any(
             nodes.get(node_id) and nodes[node_id].kind == "entrance"
             and (node_id not in entrances_by_node or entrances_by_node[node_id].current_step_free_status != "verified")

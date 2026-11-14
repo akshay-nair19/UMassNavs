@@ -4,10 +4,14 @@ let destinations = [];
 let chosenEvent = null;
 let textDestination = null;
 let stops = [];
+let tripRevision = 0;
 
 function clearTripPreview() {
+  tripRevision += 1;
   $('trip-result').textContent = 'Review your itinerary to update the preview and travel links.';
   $('trip-result').classList.remove('error');
+  $('route-details').replaceChildren();
+  $('route-details').hidden = true;
   $('transit-legs').replaceChildren();
   $('transit-legs').hidden = true;
 }
@@ -216,7 +220,50 @@ function showTransitLegs(itinerary) {
   panel.append(heading, intro, list); panel.hidden = false;
 }
 
-$('review-trip').addEventListener('click', () => {
+function renderRouteDetails(legs) {
+  const panel = $('route-details'); panel.replaceChildren();
+  for (const [index, leg] of legs.entries()) {
+    const card = document.createElement('article'); card.className = 'route-leg glass-card';
+    const heading = document.createElement('h3'); heading.textContent = `Leg ${index + 1}: ${leg.from} → ${leg.to}`;
+    const status = document.createElement('p'); status.className = 'route-leg-status';
+    if (leg.status === 'verified') {
+      status.textContent = `Reviewed walking path · ${Math.round(leg.distance_m)} m of measured segments`;
+      const intro = document.createElement('p'); intro.className = 'route-disclaimer';
+      intro.textContent = 'Schematic segment sequence. Follow current signs and check for closures; this is not live navigation.';
+      card.append(heading, status, intro);
+      const list = document.createElement('ol'); list.className = 'route-segments';
+      for (const segment of leg.segments) {
+        const row = document.createElement('li');
+        const direction = document.createElement('strong');
+        direction.textContent = `${segment.from} → ${segment.to}`;
+        const facts = document.createElement('span');
+        facts.textContent = `${segment.mode} · ${Math.round(segment.distance_m)} m · grade ${segment.grade_percent}% · ${segment.step_free_status === 'verified' ? 'step-free field review' : 'stairs or barrier present'}`;
+        row.append(direction, facts);
+        for (const source of segment.evidence) {
+          const link = document.createElement('a'); link.href = source.url; link.target = '_blank';
+          link.rel = 'noopener noreferrer'; link.textContent = `${source.title} · source ${source.source_date} · reviewed ${source.review_date}`;
+          row.append(link);
+        }
+        list.append(row);
+      }
+      card.append(list);
+    } else {
+      status.textContent = leg.status === 'same_place' ? leg.message :
+        leg.status === 'external_transit_required' ? 'Transit planning required outside this app.' :
+          'No verified route available for this leg.';
+      card.append(heading, status);
+      if (leg.message && leg.status === 'unavailable') {
+        const explanation = document.createElement('p'); explanation.className = 'route-disclaimer';
+        explanation.textContent = leg.message; card.append(explanation);
+      }
+    }
+    panel.append(card);
+  }
+  panel.hidden = false;
+  window.CampusEffects?.initGlassCards();
+}
+
+$('review-trip').addEventListener('click', async () => {
   const origin = $('origin').value.trim(); const destination = $('destination').value.trim();
   const result = $('trip-result'); result.classList.remove('error');
   if (!$('request-conflict').hidden) {
@@ -228,12 +275,32 @@ $('review-trip').addEventListener('click', () => {
     result.classList.add('error'); return;
   }
   const itinerary = [origin, ...stops, destination];
+  const revision = ++tripRevision;
   const mode = $('travel-mode').selectedOptions[0].textContent.toLowerCase();
-  const busNote = $('travel-mode').value === 'walk' ? '' :
-    ' Use the links below to plan each transit leg externally; this app has not computed bus departures or transfers.';
-  result.textContent = `Itinerary preview (${mode}): ${itinerary.join(' → ')}. No verified route available yet. Step-free access and grades cannot be confirmed until reviewed path data is added.${busNote}`;
+  result.textContent = `Checking ${itinerary.length - 1} ${itinerary.length === 2 ? 'leg' : 'legs'}…`;
+  $('route-details').replaceChildren(); $('route-details').hidden = true;
   if ($('travel-mode').value === 'walk') { $('transit-legs').replaceChildren(); $('transit-legs').hidden = true; }
   else showTransitLegs(itinerary);
+  $('review-trip').disabled = true;
+  try {
+    const response = await fetch('/api/route', {method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({itinerary, mode: $('travel-mode').value,
+        step_free: $('step-free').checked, avoid_steep: $('grades').checked})});
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.detail || 'Route review failed.');
+    if (revision !== tripRevision) return;
+    const unavailable = data.legs.filter(leg => leg.status === 'unavailable').length;
+    const busNote = $('travel-mode').value === 'walk' ? '' : ' Use the external links below to plan transit; bus service and walking connections are not computed here.';
+    result.textContent = `Itinerary (${mode}): ${itinerary.join(' → ')}. ${data.status === 'verified' ?
+      'Every leg has a reviewed walking path or starts and ends at the same place.' :
+      unavailable ? `No verified route available for ${unavailable} ${unavailable === 1 ? 'leg' : 'legs'}.` :
+        'No complete route is calculated in this app.'}${busNote}`;
+    renderRouteDetails(data.legs);
+  } catch (error) {
+    if (revision !== tripRevision) return;
+    result.textContent = `Could not check route data: ${error.message}`;
+    result.classList.add('error');
+  } finally { $('review-trip').disabled = false; }
 });
 
 renderStops();
