@@ -5,6 +5,13 @@ let chosenEvent = null;
 let textDestination = null;
 let stops = [];
 
+function clearTripPreview() {
+  $('trip-result').textContent = 'Review your itinerary to update the preview and travel links.';
+  $('trip-result').classList.remove('error');
+  $('transit-legs').replaceChildren();
+  $('transit-legs').hidden = true;
+}
+
 fetch('/api/places').then(response => response.json()).then(data => {
   places = data;
   for (const place of places) {
@@ -40,14 +47,14 @@ function renderStops() {
       button.setAttribute('aria-label', `Move ${name} ${word.toLowerCase()}`);
       button.addEventListener('click', () => {
         [stops[index], stops[index + offset]] = [stops[index + offset], stops[index]];
-        renderStops(); $('stop-status').textContent = `${name} moved ${word.toLowerCase()}.`;
+        renderStops(); clearTripPreview(); $('stop-status').textContent = `${name} moved ${word.toLowerCase()}.`;
       });
       actions.append(button);
     }
     const remove = document.createElement('button'); remove.type = 'button';
     remove.textContent = 'Remove'; remove.setAttribute('aria-label', `Remove ${name}`);
     remove.addEventListener('click', () => {
-      stops.splice(index, 1); renderStops(); $('stop-status').textContent = `${name} removed.`;
+      stops.splice(index, 1); renderStops(); clearTripPreview(); $('stop-status').textContent = `${name} removed.`;
       $('add-stop').focus();
     });
     actions.append(remove); row.append(label, actions); list.append(row);
@@ -59,7 +66,7 @@ function addStop() {
   const name = $('stop-input').value.trim();
   if (!name) { $('stop-status').textContent = 'Enter a stop before adding it.'; return; }
   if (stops.length >= 12) { $('stop-status').textContent = 'Use up to 12 stops in one itinerary.'; return; }
-  stops.push(name); $('stop-input').value = ''; renderStops();
+  stops.push(name); $('stop-input').value = ''; renderStops(); clearTripPreview();
   $('stop-status').textContent = `${name} added as stop ${stops.length}.`;
   $('stop-input').focus();
 }
@@ -75,6 +82,7 @@ function selectEvent(group) {
   $('destination').focus();
   renderEvents();
   interpretRequest();
+  clearTripPreview();
 }
 
 function mentionedPlace(text) {
@@ -105,11 +113,11 @@ function interpretRequest() {
 $('request').addEventListener('change', interpretRequest);
 $('use-text').addEventListener('click', () => {
   $('destination').value = textDestination.name;
-  chosenEvent = null; $('request-conflict').hidden = true; renderEvents(); $('destination').focus();
+  chosenEvent = null; $('request-conflict').hidden = true; renderEvents(); clearTripPreview(); $('destination').focus();
 });
 $('use-class').addEventListener('click', () => {
   $('destination').value = chosenEvent.place_name || chosenEvent.location;
-  $('request-conflict').hidden = true; textDestination = null; $('destination').focus();
+  $('request-conflict').hidden = true; textDestination = null; clearTripPreview(); $('destination').focus();
 });
 
 function renderEvents() {
@@ -170,7 +178,43 @@ $('import-calendar').addEventListener('click', async () => {
 
 $('travel-mode').addEventListener('change', () => {
   $('transit-guidance').hidden = $('travel-mode').value === 'walk';
+  clearTripPreview();
 });
+
+for (const id of ['origin', 'destination', 'request']) {
+  $(id).addEventListener('input', clearTripPreview);
+}
+for (const id of ['step-free', 'grades']) {
+  $(id).addEventListener('change', clearTripPreview);
+}
+
+function placeQuery(name) {
+  return places.some(place => place.name === name) ? `${name}, UMass Amherst, MA` : name;
+}
+
+function showTransitLegs(itinerary) {
+  const panel = $('transit-legs'); panel.replaceChildren();
+  const heading = document.createElement('h3'); heading.textContent = 'Plan each bus leg';
+  const intro = document.createElement('p');
+  intro.textContent = 'These links open Google Maps with each leg filled in. Check its place matches, current service, and walking portions. Opening a link shares that leg’s place names with Google.';
+  const list = document.createElement('ol');
+  for (let index = 0; index < itinerary.length - 1; index++) {
+    const from = itinerary[index], to = itinerary[index + 1];
+    const url = new URL('https://www.google.com/maps/dir/');
+    url.searchParams.set('api', '1');
+    url.searchParams.set('origin', placeQuery(from));
+    url.searchParams.set('destination', placeQuery(to));
+    url.searchParams.set('travelmode', 'transit');
+    const row = document.createElement('li');
+    const label = document.createElement('span'); label.textContent = `${from} → ${to}`;
+    const link = document.createElement('a'); link.href = url.toString();
+    link.target = '_blank'; link.rel = 'noopener noreferrer';
+    link.textContent = 'Open transit directions';
+    link.setAttribute('aria-label', `Open transit directions for leg ${index + 1}: ${from} to ${to}`);
+    row.append(label, link); list.append(row);
+  }
+  panel.append(heading, intro, list); panel.hidden = false;
+}
 
 $('review-trip').addEventListener('click', () => {
   const origin = $('origin').value.trim(); const destination = $('destination').value.trim();
@@ -186,8 +230,10 @@ $('review-trip').addEventListener('click', () => {
   const itinerary = [origin, ...stops, destination];
   const mode = $('travel-mode').selectedOptions[0].textContent.toLowerCase();
   const busNote = $('travel-mode').value === 'walk' ? '' :
-    ' Check the official transit links above for current bus service between each stop; this app has not computed bus legs, departures, or transfers.';
+    ' Use the links below to plan each transit leg externally; this app has not computed bus departures or transfers.';
   result.textContent = `Itinerary preview (${mode}): ${itinerary.join(' → ')}. No verified route available yet. Step-free access and grades cannot be confirmed until reviewed path data is added.${busNote}`;
+  if ($('travel-mode').value === 'walk') { $('transit-legs').replaceChildren(); $('transit-legs').hidden = true; }
+  else showTransitLegs(itinerary);
 });
 
 renderStops();
