@@ -1,6 +1,6 @@
 # UMass Campus Navigator
 
-Local-first prototype for entering a campus destination and importing an iCalendar class schedule. This first milestone previews a trip and **does not calculate or certify routes**. No map, accessibility, or grade data has been verified.
+Local-first prototype for planning a campus itinerary and importing an iCalendar class schedule. It previews an ordered itinerary and **does not calculate or certify routes**. No path, accessibility, grade, or bus-stop connection data has been verified.
 
 ## Run locally
 
@@ -17,8 +17,10 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Use `Ctrl+C` to stop it. Ru
 
 ## What works
 
-- Enter or search for a starting point and destination; manually entered places remain usable as text.
-- Import an `.ics` file, inspect events in a bounded 30-day window, and select or correct a class destination. The next upcoming event with a matched campus location is selected automatically.
+- Enter or search for a starting point, up to 12 ordered stops, and a final destination; manually entered places remain usable as text. Move or remove stops before reviewing the itinerary.
+- Search a catalog drawn from all 200 entries in the [UMass January 2026 campus map building index](https://www.umass.edu/sites/default/files/2026-03/FY26_Campus_Map_Update_with_INDEX-FINAL-EDITORIAL_FINAL.pdf), plus existing calendar aliases. The picker currently has 201 entries after near-duplicate names are merged. Map grid references are labels, not precise coordinates or route evidence.
+- Select walking, public bus, or walking plus public bus. The bus modes show [UMass Transit routes and schedules](https://www.umass.edu/transportation/transit/pvta-routes-and-schedules) and the [PVTA trip planner](https://www.pvta.com/) for current service; the app does not compute a bus itinerary, stop, departure, transfer, or accessibility claim.
+- Import an `.ics` file in a bounded 30-day window. Recurring meetings at the same matched building appear as one destination card with its next meeting and class names. The next upcoming event with a matched campus location is selected automatically.
 - Handle `DTSTART`, `DTEND` or `DURATION`, `RRULE`, `EXDATE`, `RECURRENCE-ID`, timezone-aware dates, folded iCalendar lines, and escaped text through the parsing libraries. Duplicate expanded occurrences are removed within one import.
 - Recognize a small set of building names and abbreviations from the supplied schedule. These aliases are **display helpers only**. A match does not verify an entrance or path.
 - Interpret simple `from … to …` requests when a known place is named. A text destination that conflicts with the selected class prompts a choice. The destination field can always be edited.
@@ -28,9 +30,9 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Use `Ctrl+C` to stop it. Ru
 - The supplied SPIRE-style export has floating local times, `X-WR-TIMEZONE:America/New_York`, recurring rules, `DURATION`, and no event `UID`. Floating times use `X-WR-TIMEZONE` when valid; otherwise they use campus time. This is an explicit assumption for that export, not a general SPIRE format guarantee.
 - The app does not save calendars or schedules. The browser sends an uploaded file to the FastAPI server on `127.0.0.1`; the server parses it in memory and returns upcoming event fields. There is no account or cloud service. Do not expose the local server to a public interface.
 - The file size limit is 2 MB. Events more than 30 days away do not appear. An unmatched or missing location is shown, but never automatically becomes the next-class destination.
-- The place alias list is small and may miss or misidentify a building, especially abbreviated locations. `Arnold Room 140` in the supplied export is deliberately left unmatched because its building identity has not been confirmed. Correct the destination in the UI. The original personal calendar is intentionally excluded from the repository; synthetic fixtures cover its relevant shape.
+- The official map is a broad index, not a live inventory or routable map. It includes areas, landmarks, and entries marked under construction or renovation. A place in the picker does not imply it is open, reachable, or accessible. Calendar aliases may still misidentify abbreviated rooms; correct them in the UI. The supplied `Arnold Room 140` now matches the indexed place **Arnold**, but the room itself remains unverified. The original personal calendar is intentionally excluded from the repository; synthetic fixtures cover its relevant shape.
 - The text request parser only recognizes known names in a basic `from … to …` pattern and the phrase “my next class.” It does not call an AI model.
-- Preferences are recorded in the interface only. No route, distance, travel time, accessibility status, or map is shown because the required evidence-backed graph does not exist yet.
+- Preferences are recorded in the interface only. No route, distance, travel time, accessibility status, or geographic map is shown because the required evidence-backed graph does not exist yet. Opening the external transit links leaves the local app and may share information you enter on those services.
 
 ## Next step: evidence-backed campus data
 

@@ -19,6 +19,30 @@ def _aware(value: date | datetime) -> datetime:
     return datetime.combine(value, time.min, CAMPUS_TZ)
 
 
+def group_destinations(events: list[dict]) -> list[dict]:
+    """Show one destination card per building, retaining the next meeting."""
+    groups = {}
+    for event in events:
+        key = event["place_id"] or "raw:" + " ".join(event["location"].casefold().split())
+        group = groups.get(key)
+        if group is None:
+            group = {
+                "id": key, "event_id": event["id"], "next_start": event["start"],
+                "next_summary": event["summary"], "place_id": event["place_id"],
+                "place_name": event["place_name"], "location": event["location"],
+                "missing_location": event["missing_location"],
+                "unresolved": event["unresolved"], "summaries": [],
+                "locations": [], "occurrence_count": 0,
+            }
+            groups[key] = group
+        group["occurrence_count"] += 1
+        if event["summary"] not in group["summaries"]:
+            group["summaries"].append(event["summary"])
+        if event["location"] and event["location"] not in group["locations"]:
+            group["locations"].append(event["location"])
+    return list(groups.values())
+
+
 def parse_events(data: bytes, now: datetime | None = None, days: int = 30) -> dict:
     if not data or len(data) > MAX_BYTES:
         raise ValueError("Choose a nonempty .ics file under 2 MB.")
@@ -85,6 +109,7 @@ def parse_events(data: bytes, now: datetime | None = None, days: int = 30) -> di
         })
     events.sort(key=lambda event: (event["start"], event["summary"]))
     next_event = next((event for event in events if event["place_id"]), None)
-    return {"events": events, "next_event_id": next_event["id"] if next_event else None,
+    return {"events": events, "destinations": group_destinations(events),
+            "next_event_id": next_event["id"] if next_event else None,
             "timezone": "America/New_York", "window_days": days,
             "duplicates_removed": duplicates_removed}

@@ -27,6 +27,9 @@ def test_recurrence_exdate_and_floating_time():
     result = parse_events(read("recurring.ics"), datetime(2026, 11, 8, 12, tzinfo=TZ))
     assert [e["start"][:10] for e in result["events"]] == ["2026-11-09", "2026-11-23", "2026-11-30"]
     assert result["events"][0]["start"].endswith("-05:00")
+    assert len(result["destinations"]) == 1
+    assert result["destinations"][0]["occurrence_count"] == 3
+    assert result["destinations"][0]["next_start"] == result["events"][0]["start"]
 
 
 def test_missing_and_unmatched_location_are_not_next_class():
@@ -34,6 +37,7 @@ def test_missing_and_unmatched_location_are_not_next_class():
     assert result["next_event_id"] is None
     assert result["events"][0]["missing_location"] is True
     assert result["events"][1]["unresolved"] is True
+    assert len(result["destinations"]) == 2
 
 
 def test_timezone_transition():

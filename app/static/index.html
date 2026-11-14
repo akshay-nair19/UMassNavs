@@ -9,29 +9,34 @@
 </head>
 <body>
   <a class="skip" href="#main">Skip to main content</a>
-  <header><div class="wrap"><span class="eyebrow">Local campus tool · First build</span><h1>Find your next campus destination</h1><p>Bring in a class schedule or enter a place yourself. Routes will appear after campus paths are reviewed.</p></div></header>
+  <header><div class="wrap hero"><div><span class="eyebrow">UMass Amherst / Campus Navigator</span><h1>Make room for the whole trip.</h1><p>Set your starting point, add stops, and bring in your classes. Your itinerary stays local while verified routes are being built.</p></div><span class="hero-badge">Local preview<br><strong>Routes pending review</strong></span></div></header>
   <main id="main" class="wrap">
     <section class="panel" aria-labelledby="trip-heading">
-      <div class="section-head"><span class="number">01</span><div><h2 id="trip-heading">Your trip</h2><p>Choose a starting point and destination.</p></div></div>
+      <div class="section-head"><span class="number">01</span><div><h2 id="trip-heading">Your itinerary</h2><p>Choose a starting point, optional stops, and a final destination.</p></div></div>
       <div class="grid">
-        <div class="field"><label for="origin">Current location</label><input id="origin" list="place-list" autocomplete="off" placeholder="Search a campus place or type a location"><small>Manual locations are allowed; they are not yet verified.</small></div>
+        <div class="field"><label for="origin">Current location</label><input id="origin" list="place-list" autocomplete="off" placeholder="Search a campus place or type a location"><small id="place-count">Loading campus place suggestions…</small><small>Manual locations are allowed; they are not yet verified.</small></div>
         <div class="field"><label for="destination">Destination</label><input id="destination" list="place-list" autocomplete="off" placeholder="Search a building or type a destination"><small>You can correct an imported class location here.</small></div>
       </div>
       <datalist id="place-list"></datalist>
+      <div class="field"><label for="stop-input">Add a stop (optional)</label><div class="inline-input"><input id="stop-input" list="place-list" autocomplete="off" placeholder="Search a place or type a stop"><button id="add-stop" type="button">Add stop</button></div><small>Stops stay in the order shown below. Move or remove them at any time.</small></div>
+      <div id="stop-status" class="hint" role="status" aria-live="polite"></div>
+      <ol id="stops" class="stops" aria-label="Stops in order"></ol>
       <div class="field"><label for="request">Describe your trip (optional)</label><input id="request" type="text" placeholder="From the library to my next class without stairs"><small>Text can suggest a destination. Confirm it in the field above.</small></div>
       <div id="request-conflict" class="notice" hidden><p id="conflict-message"></p><button id="use-text" type="button">Use text destination</button> <button id="use-class" type="button">Use selected class</button></div>
+      <div class="field"><label for="travel-mode">Travel mode</label><select id="travel-mode"><option value="walk">Walking</option><option value="bus">Public bus</option><option value="mixed">Walking and public bus</option></select><small>Selecting bus shows official transit planning resources for your itinerary.</small></div>
+      <div id="transit-guidance" class="transit-guidance" hidden><strong>Check transit before each leg.</strong> UMass Transit lists campus shuttle routes 34 and 35, current schedules, and bus tracking. <a href="https://www.umass.edu/transportation/transit/pvta-routes-and-schedules" target="_blank" rel="noopener noreferrer">UMass routes and schedules</a> · <a href="https://www.pvta.com/" target="_blank" rel="noopener noreferrer">PVTA trip planner</a>. External sites may have different privacy practices.</div>
       <fieldset><legend>Preferences</legend><label class="check"><input id="step-free" type="checkbox" checked> Step-free route required</label><label class="check"><input id="grades" type="checkbox"> Avoid steep grades</label><p class="hint">Path and grade evidence have not been reviewed yet, so neither preference can be verified.</p></fieldset>
-      <button id="review-trip" class="primary" type="button">Review trip</button>
-      <div id="trip-result" class="notice" role="status" aria-live="polite">Choose a destination to begin. No verified route data is installed.</div>
+      <button id="review-trip" class="primary" type="button">Review itinerary</button>
+      <div id="trip-result" class="notice" role="status" aria-live="polite">Enter a starting point and destination, then review your itinerary. Verified routes are still being built.</div>
     </section>
 
     <section class="panel" aria-labelledby="calendar-heading">
-      <div class="section-head"><span class="number">02</span><div><h2 id="calendar-heading">Class schedule</h2><p>Import an iCalendar file to choose an upcoming class.</p></div></div>
+      <div class="section-head"><span class="number">02</span><div><h2 id="calendar-heading">Class destinations</h2><p>Recurring meetings at the same destination appear once, with the next meeting shown.</p></div></div>
       <div class="upload-row"><div class="field"><label for="calendar-file">Calendar file (.ics)</label><input id="calendar-file" type="file" accept=".ics,text/calendar"><small>Processed in memory on this computer. Nothing is saved by the app.</small></div><button id="import-calendar" type="button">Import schedule</button></div>
       <div id="calendar-status" class="hint" role="status" aria-live="polite">No calendar imported.</div>
-      <div id="events" class="events" aria-label="Upcoming events"></div>
+      <div id="events" class="events" aria-label="Upcoming class destinations"><p class="empty-state">Your class destinations will appear here after you import an .ics file.</p></div>
     </section>
-    <p class="footer-note">Campus Navigator · Calendar and destination preview. No accessibility or navigation claims yet.</p>
+    <p class="footer-note">Campus Navigator <span aria-hidden="true">/</span> Itinerary preview only. No accessibility or navigation claims yet.</p>
   </main>
 </body>
 </html>
