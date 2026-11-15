@@ -94,6 +94,9 @@ button:disabled { background: rgba(75,85,99,.13); border-color: rgba(148,163,184
 .stop-row > span:first-child { overflow-wrap: anywhere; }
 .stop-actions { display: flex; flex: none; flex-wrap: wrap; gap: 4px; }
 .stop-actions button { font-size: .78rem; min-height: 34px; padding: 5px 8px; }
+.ai-control { align-items: center; background: rgba(129,140,248,.07); border: 1px solid var(--border-subtle); border-radius: 12px; display: flex; flex-wrap: wrap; gap: 4px 16px; margin: -8px 0 10px; padding: 12px 14px; }
+.ai-control .check { flex: none; font-size: .86rem; font-weight: 650; margin: 0; }
+.ai-control span { color: var(--text-muted); flex: 1 1 260px; font-size: .8rem; line-height: 1.45; }
 
 fieldset { border: 1px solid var(--border-subtle); border-radius: 12px; margin: 0 0 24px; padding: 14px 18px; }
 legend { padding: 0 6px; }

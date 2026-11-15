@@ -5,6 +5,7 @@ let chosenEvent = null;
 let textDestination = null;
 let stops = [];
 let tripRevision = 0;
+let interpretRevision = 0;
 
 function clearTripPreview() {
   tripRevision += 1;
@@ -115,6 +116,56 @@ function interpretRequest() {
 }
 
 $('request').addEventListener('change', interpretRequest);
+$('request').addEventListener('input', () => { interpretRevision += 1; });
+$('use-local-ai').addEventListener('change', () => {
+  interpretRevision += 1;
+  $('interpret-status').textContent = $('use-local-ai').checked ?
+    'Local Ollama is on. Select Interpret text to request suggestions.' :
+    'Basic text matching is ready. Ollama is off.';
+});
+$('interpret-request').addEventListener('click', async () => {
+  const text = $('request').value.trim();
+  if (!text) { $('interpret-status').textContent = 'Enter a trip request first.'; return; }
+  if (!$('use-local-ai').checked) {
+    interpretRequest();
+    $('interpret-status').textContent = 'Basic text matching applied. Check the place fields and preferences.';
+    return;
+  }
+  const revision = ++interpretRevision;
+  $('interpret-request').disabled = true;
+  $('interpret-status').textContent = 'Asking local Ollama for place and preference suggestions…';
+  try {
+    const response = await fetch('/api/interpret', {method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({text, use_local_ai: true})});
+    if (!response.ok) throw new Error('Local interpretation unavailable.');
+    const data = await response.json();
+    if (revision !== interpretRevision) return;
+    if (data.status !== 'ai' || !data.suggestion) throw new Error('Local interpretation unavailable.');
+    const suggestion = data.suggestion;
+    const origin = places.find(place => place.id === suggestion.origin_id);
+    const destination = places.find(place => place.id === suggestion.destination_id);
+    if (origin && !$('origin').value.trim()) $('origin').value = origin.name;
+    if (suggestion.step_free) $('step-free').checked = true;
+    if (suggestion.avoid_steep) $('grades').checked = true;
+    textDestination = destination || null;
+    if (destination && chosenEvent && chosenEvent.place_id !== destination.id) {
+      $('conflict-message').textContent = `Local text interpretation suggests ${destination.name}, while the selected class is at ${chosenEvent.place_name || chosenEvent.location}. Which destination should be used?`;
+      $('request-conflict').hidden = false;
+    } else {
+      $('request-conflict').hidden = true;
+      if (destination) $('destination').value = destination.name;
+      else if (suggestion.next_class && chosenEvent) $('destination').value = chosenEvent.place_name || chosenEvent.location;
+    }
+    clearTripPreview();
+    $('interpret-status').textContent = suggestion.next_class && !chosenEvent ?
+      'Local suggestions applied; import or select a class for “my next class.” Check the fields.' :
+      'Local suggestions applied. Check the place fields and preferences before reviewing the itinerary.';
+  } catch (error) {
+    if (revision !== interpretRevision) return;
+    interpretRequest();
+    $('interpret-status').textContent = 'Ollama was unavailable or returned an invalid suggestion. Basic text matching was applied; check the fields.';
+  } finally { $('interpret-request').disabled = false; }
+});
 $('use-text').addEventListener('click', () => {
   $('destination').value = textDestination.name;
   chosenEvent = null; $('request-conflict').hidden = true; renderEvents(); clearTripPreview(); $('destination').focus();

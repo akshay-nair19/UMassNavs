@@ -15,6 +15,12 @@ python3.11 -m venv .venv
 
 Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Use `Ctrl+C` to stop it. Run tests with `.venv/bin/python -m pip install pytest httpx` and `.venv/bin/python -m pytest -q`.
 
+### Optional local text interpretation
+
+The Ollama toggle is off by default. The machine used for development has `llama3:8b` installed, so that is the default model. Start your local Ollama service and select **Use local Ollama to interpret text**, then **Interpret text**. To use another installed model, set `UMASSNAV_OLLAMA_MODEL` before starting Uvicorn, for example `UMASSNAV_OLLAMA_MODEL=llama3.2:3b .venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000`. The model must already be available locally.
+
+Only the text in **Describe your trip** is sent from the app server to Ollama at `127.0.0.1:11434`. The endpoint is fixed in code; no remote model provider or arbitrary URL is used. Calendar contents, route data, and stops are not sent to Ollama. Suggestions must use places explicitly named in the text and are shown in editable fields for review. Missing, slow, or malformed model responses fall back to basic text matching. Ollama cannot add routes or certify accessibility. See [Ollama's API documentation](https://docs.ollama.com/api) for the local service.
+
 ## What works
 
 - Enter or search for a starting point, up to 12 ordered stops, and a final destination; manually entered places remain usable as text. Move or remove stops before reviewing the itinerary.
@@ -25,6 +31,7 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Use `Ctrl+C` to stop it. Ru
 - Handle `DTSTART`, `DTEND` or `DURATION`, `RRULE`, `EXDATE`, `RECURRENCE-ID`, timezone-aware dates, folded iCalendar lines, and escaped text through the parsing libraries. Duplicate expanded occurrences are removed within one import.
 - Recognize a small set of building names and abbreviations from the supplied schedule. These aliases are **display helpers only**. A match does not verify an entrance or path.
 - Interpret simple `from … to …` requests when a known place is named. A text destination that conflicts with the selected class prompts a choice. The destination field can always be edited.
+- Optionally interpret a text request with local Ollama to suggest matching catalog places, “next class,” step-free, and grade preferences. The same manual workflow remains available with the toggle off or Ollama unavailable.
 
 ## Assumptions and limits
 
@@ -38,4 +45,4 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Use `Ctrl+C` to stop it. Ru
 
 ## Campus graph status
 
-Milestone 2 includes a typed graph schema, a small source-reviewed subset, and a validator. Milestone 3 adds Dijkstra search and a route result interface. The [graph review notes](docs/graph-review.md) explain the sources and the field checks needed to promote a candidate connection. Run `.venv/bin/python -m scripts.validate_graph` to check the data. It currently reports **zero eligible step-free edges**; the app returns a no-route result for current campus trips. Synthetic graph tests exercise path selection without shipping fictitious campus routes.
+Milestone 2 includes a typed graph schema, a small source-reviewed subset, and a validator. Milestone 3 adds Dijkstra search and a route result interface. Milestone 4 adds optional local text interpretation. The [graph review notes](docs/graph-review.md) explain the sources and the field checks needed to promote a candidate connection. Run `.venv/bin/python -m scripts.validate_graph` to check the data. It currently reports **zero eligible step-free edges**; the app returns a no-route result for current campus trips. Synthetic graph tests exercise path selection without shipping fictitious campus routes.

@@ -8,6 +8,7 @@ from .calendar import parse_events
 from .places import PLACES, resolve_place
 from .graph import load_graph
 from .routing import find_route, route_payload
+from .ai import suggest_intent
 
 app = FastAPI(title="UMass Campus Navigator", docs_url=None, redoc_url=None)
 STATIC = Path(__file__).parent / "static"
@@ -44,6 +45,19 @@ class RouteRequest(BaseModel):
     mode: str = "walk"
     step_free: bool = True
     avoid_steep: bool = False
+
+
+class InterpretRequest(BaseModel):
+    text: str = Field(min_length=1, max_length=500)
+    use_local_ai: bool = False
+
+
+@app.post("/api/interpret")
+def interpret(request: InterpretRequest):
+    if not request.text.strip() or not request.use_local_ai:
+        return {"status": "fallback", "suggestion": None}
+    suggestion = suggest_intent(request.text)
+    return {"status": "ai" if suggestion else "fallback", "suggestion": suggestion}
 
 
 @app.post("/api/route")
